@@ -12,16 +12,27 @@ services:
       - "8787:8787"
     command: ["dask-scheduler"]
 
-  worker:
+  worker_1:
     build:
       context: ./base
       dockerfile: Dockerfile
     image: daskdev/dask
-    hostname: dask-worker
+    hostname: dask-worker-1
     command: ["dask-worker", "tcp://scheduler:8786"]
     environment: 
       - EXTRA_CONDA_PACKAGES=wand==0.5.6
-      - EXTRA_APT_PACKAGES=imagemagick
+      - EXTRA_APT_PACKAGES=imagemagick wget
+  
+  worker_2:
+    build:
+      context: ./base
+      dockerfile: Dockerfile
+    image: daskdev/dask
+    hostname: dask-worker-2
+    command: ["dask-worker", "tcp://scheduler:8786"]
+    environment: 
+      - EXTRA_CONDA_PACKAGES=wand==0.5.6
+      - EXTRA_APT_PACKAGES=imagemagick wget
 
   notebook:
     build:

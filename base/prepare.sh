@@ -27,4 +27,6 @@ if [ "$EXTRA_PIP_PACKAGES" ]; then
 fi
 
 # Run extra commands
+wget "http://www.fmwconcepts.com/imagemagick/downloadcounter.php?scriptname=autocolor&dirname=autocolor" -O /opt/autocolor.sh
+chmod +x /opt/autocolor.sh
 exec "$@"
